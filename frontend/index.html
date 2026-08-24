@@ -39,14 +39,14 @@
     </script>
         <style>
         body { 
-            background-color: #030303; 
+            background-color: #000000; /* Darker outer background */
             color: #e0e0e0; 
             overflow: hidden; /* Prevent body scroll, handle in components */
         }
         /* Industrial scrollbar */
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
-        ::-webkit-scrollbar-track { background: #080808; }
-        ::-webkit-scrollbar-thumb { background: #333333; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #333333; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #888888; }
         
         /* Scanline effect for the entire console */
