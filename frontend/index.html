@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrictionForge - Dispatch Console</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vulcan: {
+                            950: '#030303', // Deepest black
+                            900: '#080808', // Background
+                            800: '#121212', // Panels
+                            700: '#1f1f1f', // Borders
+                            600: '#333333', // Muted elements
+                            400: '#888888', // Secondary text
+                            100: '#e0e0e0', // Primary text
+                        },
+                        event: {
+                            sys: '#6b7280',      // Gray
+                            intercept: '#06b6d4', // Cyan
+                            extract: '#eab308',   // Yellow
+                            verify: '#10b981',    // Emerald
+                            ledger: '#d946ef',    // Fuchsia
+                            action: '#3b82f6',    // Blue
+                            watchdog: '#ef4444',  // Red
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
+                        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+        <style>
+        body { 
+            background-color: #030303; 
+            color: #e0e0e0; 
+            overflow: hidden; /* Prevent body scroll, handle in components */
+        }
+        /* Industrial scrollbar */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #333333; }
+        ::-webkit-scrollbar-thumb:hover { background: #888888; }
+        
+        /* Scanline effect for the entire console */
+        .scanlines::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 50;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="scanlines">
+    <div id="root" class="h-screen w-screen"></div>
+    <script type="module" src="./index.tsx"></script>
+<script type="module" src="/index.js"></script></body>
+</html>
