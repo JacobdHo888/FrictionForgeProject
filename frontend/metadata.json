@@ -1,4 +1,4 @@
 {
   "name": "FrictionForge Dispatch Console",
-  "description": "Event-sourced shift log and dispatch console for the FrictionForge Taskmaster AI Agent."
+  "description": "Event-sourced shift log simulating the Extractor and Verifier adversarial architecture."
 }
