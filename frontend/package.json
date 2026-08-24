@@ -12,7 +12,8 @@
     "react": "latest",
     "react-dom": "latest",
     "lucide-react": "latest",
-    "@google/genai": "latest"
+    "@google/genai": "latest",
+    "recharts": "latest"
   },
   "devDependencies": {
     "@types/node": "latest",
