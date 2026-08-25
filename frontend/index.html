@@ -11,15 +11,15 @@
                 extend: {
                     colors: {
                         vulcan: {
-                            950: '#030303', // Deepest black
-                            900: '#080808', // Background
-                            800: '#121212', // Panels
-                            700: '#1f1f1f', // Borders
-                            600: '#333333', // Muted elements
-                            500: '#555555',
-                            400: '#888888', // Secondary text
-                            300: '#aaaaaa',
-                            100: '#e0e0e0', // Primary text
+                            950: '#0b0f19', // Deepest background (body/inputs)
+                            900: '#111827', // App container
+                            800: '#1f2937', // Panels, headers
+                            700: '#374151', // Borders
+                            600: '#4b5563', // Muted elements
+                            500: '#6b7280',
+                            400: '#9ca3af', // Secondary text
+                            300: '#d1d5db',
+                            100: '#f9fafb', // Primary text
                         },
                         status: {
                             green: '#10b981',   // Confirmed / Success
@@ -40,12 +40,12 @@
                     },
                     keyframes: {
                         logPulse: {
-                            '0%': { backgroundColor: 'rgba(255, 255, 255, 0.08)', boxShadow: 'inset 2px 0 0 0 rgba(255,255,255,0.5)' },
+                            '0%': { backgroundColor: 'rgba(255, 255, 255, 0.1)', boxShadow: 'inset 2px 0 0 0 rgba(255,255,255,0.6)' },
                             '100%': { backgroundColor: 'transparent', boxShadow: 'inset 0 0 0 0 transparent' },
                         },
                         ledgerFlash: {
-                            '0%': { borderColor: '#d946ef', boxShadow: 'inset 0 0 30px rgba(217, 70, 239, 0.15), 0 0 15px rgba(217, 70, 239, 0.2)' },
-                            '100%': { borderColor: '#1f1f1f', boxShadow: 'none' },
+                            '0%': { borderColor: '#d946ef', boxShadow: 'inset 0 0 30px rgba(217, 70, 239, 0.2), 0 0 15px rgba(217, 70, 239, 0.3)' },
+                            '100%': { borderColor: '#374151', boxShadow: 'none' },
                         }
                     }
                 }
@@ -54,28 +54,28 @@
     </script>
         <style>
         body { 
-            background-color: #030303; 
-            color: #e0e0e0; 
+            background-color: #0b0f19; 
+            color: #f9fafb; 
             overflow: hidden; 
         }
         /* Industrial scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #333333; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555555; }
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
         
         /* Modern Monitoring Wall Grid Background */
         .grid-bg {
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
             background-size: 40px 40px;
             background-position: center center;
         }
         
         /* Subtle radial gradient to darken edges */
         .vignette {
-            background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+            background: radial-gradient(circle at center, transparent 30%, rgba(11, 15, 25, 0.8) 100%);
             pointer-events: none;
         }
     </style>
