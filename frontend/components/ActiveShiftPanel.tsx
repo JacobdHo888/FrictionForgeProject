@@ -67,7 +67,7 @@ export const ActiveShiftPanel: React.FC<ActiveShiftPanelProps> = ({ events, onRu
         <div className="flex flex-col h-full">
             {/* Ledger Totals */}
             <div className={`flex-1 border-b flex flex-col min-h-0 transition-colors duration-300 ${flashLedger ? 'animate-ledger-flash border-status-purple' : 'border-vulcan-700'}`}>
-                <div className="p-3 border-b border-vulcan-700 flex items-center justify-between shrink-0 bg-vulcan-800/50">
+                <div className="p-3 border-b border-vulcan-700 flex items-center justify-between shrink-0 bg-vulcan-800">
                     <div className="flex items-center space-x-2">
                         <Database className="w-4 h-4 text-status-purple" />
                         <h2 className="text-xs font-bold text-vulcan-100 tracking-widest uppercase">Ledger Totals</h2>
@@ -83,7 +83,7 @@ export const ActiveShiftPanel: React.FC<ActiveShiftPanelProps> = ({ events, onRu
                 </div>
                 <div className="p-4 space-y-4 flex-1 overflow-y-auto">
                     {totals.map((total, idx) => (
-                        <div key={idx} className="bg-vulcan-950/50 border border-vulcan-700 p-3 rounded-sm">
+                        <div key={idx} className="bg-vulcan-900 border border-vulcan-700 p-3 rounded-sm">
                             <div className="text-[10px] font-mono text-vulcan-400 uppercase tracking-widest mb-1">
                                 {total.category}
                             </div>
@@ -100,10 +100,10 @@ export const ActiveShiftPanel: React.FC<ActiveShiftPanelProps> = ({ events, onRu
 
             {/* Review Queue */}
             <div className="flex-1 flex flex-col min-h-0">
-                <div className="p-3 border-b border-vulcan-700 flex items-center space-x-2 shrink-0 bg-vulcan-800/50">
+                <div className="p-3 border-b border-vulcan-700 flex items-center space-x-2 shrink-0 bg-vulcan-800">
                     <AlertOctagon className="w-4 h-4 text-status-red" />
                     <h2 className="text-xs font-bold text-vulcan-100 tracking-widest uppercase">Review Queue</h2>
-                    <span className={`ml-auto text-[10px] font-bold px-1.5 py-0.5 rounded-sm ${reviewQueue.length > 0 ? 'bg-status-red text-vulcan-950' : 'bg-vulcan-800 text-vulcan-500'}`}>
+                    <span className={`ml-auto text-[10px] font-bold px-1.5 py-0.5 rounded-sm ${reviewQueue.length > 0 ? 'bg-status-red text-vulcan-950' : 'bg-vulcan-900 text-vulcan-500'}`}>
                         {reviewQueue.length}
                     </span>
                 </div>
@@ -114,7 +114,7 @@ export const ActiveShiftPanel: React.FC<ActiveShiftPanelProps> = ({ events, onRu
                         </div>
                     ) : (
                         reviewQueue.map(item => (
-                            <div key={item.id} className="bg-vulcan-950/50 border border-vulcan-700 p-2 flex flex-col space-y-2 rounded-sm animate-log-pulse">
+                            <div key={item.id} className="bg-vulcan-900 border border-vulcan-700 p-2 flex flex-col space-y-2 rounded-sm animate-log-pulse">
                                 <div className="flex justify-between items-center border-b border-vulcan-800 pb-1">
                                     <span className="text-[10px] font-mono text-vulcan-400">
                                         {new Date(item.timestamp).toLocaleTimeString()}
