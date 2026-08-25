@@ -3,6 +3,8 @@ export type EventType =
     | 'EMAIL_INTERCEPTED' 
     | 'TRIAGE_PASSED'
     | 'TRIAGE_REJECTED'
+    | 'SANITIZATION_PASSED'
+    | 'SANITIZATION_FAILED'
     | 'EXTRACTION_ATTEMPTED' 
     | 'VERIFICATION_RETURNED' 
     | 'LEDGER_UPDATED' 
@@ -11,12 +13,14 @@ export type EventType =
     | 'CALENDAR_EVENT_CREATED'
     | 'DRAFT_COMPOSED'
     | 'ACTION_FAILED'
-    | 'DIGEST_GENERATED';
+    | 'DIGEST_GENERATED'
+    | 'REVIEW_RESOLVED';
 
 export type AgentType = 
     | 'SYSTEM' 
     | 'GMAIL_LISTENER' 
     | 'TRIAGE_FILTER'
+    | 'SANITIZER'
     | 'EXTRACTOR' 
     | 'VERIFIER' 
     | 'LEDGER_CLERK' 
@@ -64,6 +68,7 @@ export interface LedgerTotal {
 
 export interface ReviewQueueItem {
     id: string;
+    taskId: string;
     timestamp: string;
     reason: string;
     status: 'PENDING' | 'RESOLVED';
