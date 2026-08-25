@@ -23,7 +23,7 @@ export const TraceViewer: React.FC<TraceViewerProps> = ({ traceId, events, onClo
                 {/* Header */}
                 <div className="px-6 py-4 border-b border-vulcan-700 flex justify-between items-center bg-vulcan-950">
                     <div className="flex items-center space-x-4">
-                        <Activity className="w-5 h-5 text-event-action" />
+                        <Activity className="w-5 h-5 text-status-blue" />
                         <div>
                             <h2 className="text-sm font-bold text-vulcan-100 tracking-widest uppercase">Cloud Trace Viewer</h2>
                             <div className="flex space-x-4 text-[10px] font-mono text-vulcan-400 mt-1">
@@ -54,16 +54,20 @@ export const TraceViewer: React.FC<TraceViewerProps> = ({ traceId, events, onClo
                         
                         // Determine color based on status
                         let barColor = 'bg-vulcan-600';
-                        if (evt.type === 'ACTION_FAILED' || evt.type === 'WATCHDOG_ESCALATION') barColor = 'bg-event-watchdog';
-                        else if (evt.type === 'VERIFICATION_RETURNED') barColor = 'bg-event-verify';
-                        else if (evt.type === 'EXTRACTION_ATTEMPTED') barColor = 'bg-event-extract';
-                        else if (evt.type === 'LEDGER_UPDATED') barColor = 'bg-event-ledger';
-                        else if (evt.type === 'CALENDAR_EVENT_CREATED' || evt.type === 'DRAFT_COMPOSED') barColor = 'bg-event-action';
-                        else if (evt.type === 'TRIAGE_PASSED') barColor = 'bg-emerald-500';
+                        if (evt.type === 'ACTION_FAILED' || evt.type === 'WATCHDOG_ESCALATION' || evt.type === 'SANITIZATION_FAILED') barColor = 'bg-status-red';
+                        else if (evt.type === 'VERIFICATION_RETURNED') {
+                            if (evt.payload?.verdict === 'CONFIRMED') barColor = 'bg-status-green';
+                            else if (evt.payload?.verdict === 'NEEDS_REVIEW') barColor = 'bg-status-amber';
+                            else barColor = 'bg-status-red';
+                        }
+                        else if (evt.type === 'EXTRACTION_ATTEMPTED') barColor = 'bg-status-amber';
+                        else if (evt.type === 'LEDGER_UPDATED') barColor = 'bg-status-purple';
+                        else if (evt.type === 'CALENDAR_EVENT_CREATED' || evt.type === 'DRAFT_COMPOSED') barColor = 'bg-status-blue';
+                        else if (evt.type === 'TRIAGE_PASSED' || evt.type === 'SANITIZATION_PASSED') barColor = 'bg-status-green';
                         else if (evt.type === 'TRIAGE_REJECTED') barColor = 'bg-vulcan-500';
 
                         return (
-                            <div key={evt.id} className="flex items-center text-xs font-mono group">
+                            <div key={evt.id} className="flex items-center text-xs font-mono group animate-log-pulse" style={{ animationDelay: `${index * 0.05}s` }}>
                                 <div className="w-48 shrink-0 pr-4">
                                     <div className="text-vulcan-100 truncate">{evt.agent}</div>
                                     <div className="text-[9px] text-vulcan-500 truncate">{evt.span_id}</div>
