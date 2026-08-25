@@ -73,7 +73,7 @@ const App: React.FC = () => {
     }, []);
 
     return (
-        <div className="flex h-screen w-screen items-center justify-center p-4 md:p-8 lg:p-12 overflow-hidden relative">
+        <div className="flex h-screen w-screen items-center justify-center p-4 md:p-8 lg:p-12 overflow-hidden relative bg-vulcan-950">
             
             {/* Trace Viewer Modal Overlay */}
             {selectedTraceId && (
@@ -85,10 +85,10 @@ const App: React.FC = () => {
             )}
 
             {/* Bounded Application Container */}
-            <div className="flex flex-col w-full max-w-[1440px] h-full max-h-[900px] bg-vulcan-950/90 backdrop-blur-md border border-vulcan-700 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden relative z-10">
+            <div className="flex flex-col w-full max-w-[1440px] h-full max-h-[900px] bg-vulcan-900 border border-vulcan-700 rounded-xl shadow-2xl overflow-hidden relative z-10">
                 
                 {/* Persistent Mission Control Header */}
-                <div className="h-10 bg-vulcan-900 border-b border-vulcan-700 flex items-center justify-between px-6 shrink-0">
+                <div className="h-10 bg-vulcan-800 border-b border-vulcan-700 flex items-center justify-between px-6 shrink-0">
                     <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-2 text-[10px] font-mono text-status-green">
                             <span className="relative flex h-2 w-2">
@@ -111,23 +111,23 @@ const App: React.FC = () => {
 
                 <div className="flex flex-1 min-h-0">
                     {/* Left Panel: Injector */}
-                    <div className="w-72 shrink-0 h-full border-r border-vulcan-700 bg-vulcan-900/50">
+                    <div className="w-72 shrink-0 h-full border-r border-vulcan-700 bg-vulcan-800/30">
                         <PayloadInjector onInject={handleInject} isProcessing={isProcessing} />
                     </div>
                     
                     {/* Center Panel: Dispatch Log / Dashboard */}
-                    <div className="flex-1 h-full relative bg-vulcan-950/50 min-w-0 flex flex-col">
+                    <div className="flex-1 h-full relative bg-vulcan-900 min-w-0 flex flex-col">
                         {/* Tab Header */}
-                        <div className="flex border-b border-vulcan-700 bg-vulcan-900/80 shrink-0">
+                        <div className="flex border-b border-vulcan-700 bg-vulcan-800 shrink-0">
                             <button 
                                 onClick={() => setCenterView('LOG')}
-                                className={`px-6 py-3 text-xs font-bold tracking-widest uppercase border-r border-vulcan-700 transition-colors ${centerView === 'LOG' ? 'bg-vulcan-950 text-status-blue shadow-[inset_0_2px_0_0_#3b82f6]' : 'text-vulcan-500 hover:text-vulcan-300'}`}
+                                className={`px-6 py-3 text-xs font-bold tracking-widest uppercase border-r border-vulcan-700 transition-colors ${centerView === 'LOG' ? 'bg-vulcan-900 text-status-blue shadow-[inset_0_2px_0_0_#3b82f6]' : 'text-vulcan-500 hover:text-vulcan-300'}`}
                             >
                                 Shift Log
                             </button>
                             <button 
                                 onClick={() => setCenterView('DASHBOARD')}
-                                className={`px-6 py-3 text-xs font-bold tracking-widest uppercase border-r border-vulcan-700 transition-colors ${centerView === 'DASHBOARD' ? 'bg-vulcan-950 text-status-blue shadow-[inset_0_2px_0_0_#3b82f6]' : 'text-vulcan-500 hover:text-vulcan-300'}`}
+                                className={`px-6 py-3 text-xs font-bold tracking-widest uppercase border-r border-vulcan-700 transition-colors ${centerView === 'DASHBOARD' ? 'bg-vulcan-900 text-status-blue shadow-[inset_0_2px_0_0_#3b82f6]' : 'text-vulcan-500 hover:text-vulcan-300'}`}
                             >
                                 Telemetry
                             </button>
@@ -144,7 +144,7 @@ const App: React.FC = () => {
                     </div>
                     
                     {/* Right Panel: Active Shift Status */}
-                    <div className="w-80 shrink-0 h-full border-l border-vulcan-700 bg-vulcan-900/50">
+                    <div className="w-80 shrink-0 h-full border-l border-vulcan-700 bg-vulcan-800/30">
                         <ActiveShiftPanel events={events} onRunDigest={handleRunDigest} onResolve={handleResolve} />
                     </div>
                 </div>
