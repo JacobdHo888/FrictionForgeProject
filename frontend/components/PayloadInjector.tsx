@@ -85,7 +85,7 @@ export const PayloadInjector: React.FC<PayloadInjectorProps> = ({ onInject, isPr
 
     return (
         <div className="flex flex-col h-full">
-            <div className="p-3 border-b border-vulcan-700 flex items-center space-x-2 shrink-0">
+            <div className="p-3 border-b border-vulcan-700 flex items-center space-x-2 shrink-0 bg-vulcan-800">
                 <Radio className="w-4 h-4 text-status-blue" />
                 <h2 className="text-xs font-bold text-vulcan-100 tracking-widest uppercase">Signal Injector</h2>
             </div>
@@ -94,7 +94,7 @@ export const PayloadInjector: React.FC<PayloadInjectorProps> = ({ onInject, isPr
                 <div className="text-[10px] font-mono text-vulcan-400 uppercase tracking-widest mb-2">Test Fixtures</div>
                 <button 
                     onClick={() => setShowDropdown(!showDropdown)}
-                    className="w-full flex items-center justify-between bg-vulcan-800 border border-vulcan-700 p-2 text-xs font-mono text-vulcan-100 hover:border-vulcan-600 transition-colors rounded-sm"
+                    className="w-full flex items-center justify-between bg-vulcan-900 border border-vulcan-700 p-2 text-xs font-mono text-vulcan-100 hover:border-vulcan-600 transition-colors rounded-sm"
                 >
                     <span className="truncate">{FIXTURES[activeFixture].name}</span>
                     <ChevronDown className="w-3 h-3 text-vulcan-400" />
@@ -136,7 +136,7 @@ export const PayloadInjector: React.FC<PayloadInjectorProps> = ({ onInject, isPr
                 />
             </div>
             
-            <div className="p-3 border-t border-vulcan-700 shrink-0">
+            <div className="p-3 border-t border-vulcan-700 shrink-0 bg-vulcan-800">
                 <button
                     onClick={handleInject}
                     disabled={isProcessing}
