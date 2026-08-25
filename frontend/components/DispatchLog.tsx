@@ -14,21 +14,27 @@ export const DispatchLog: React.FC<DispatchLogProps> = ({ events, onOpenTrace })
         endOfLogRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [events]);
 
-    const getEventColor = (type: EventType) => {
+    const getEventColor = (type: EventType, payload?: any) => {
         switch (type) {
-            case 'SYS_INIT': return 'text-event-sys';
-            case 'EMAIL_INTERCEPTED': return 'text-event-intercept';
-            case 'TRIAGE_PASSED': return 'text-emerald-500';
+            case 'SYS_INIT': return 'text-vulcan-500';
+            case 'EMAIL_INTERCEPTED': return 'text-status-cyan';
+            case 'TRIAGE_PASSED': return 'text-status-green';
             case 'TRIAGE_REJECTED': return 'text-vulcan-500';
-            case 'EXTRACTION_ATTEMPTED': return 'text-event-extract';
-            case 'VERIFICATION_RETURNED': return 'text-event-verify';
-            case 'LEDGER_UPDATED': return 'text-event-ledger';
-            case 'ACTION_TAKEN': return 'text-event-action';
-            case 'WATCHDOG_ESCALATION': return 'text-event-watchdog';
-            case 'CALENDAR_EVENT_CREATED': return 'text-blue-400';
-            case 'DRAFT_COMPOSED': return 'text-purple-400';
-            case 'ACTION_FAILED': return 'text-red-500';
-            case 'DIGEST_GENERATED': return 'text-emerald-400';
+            case 'SANITIZATION_PASSED': return 'text-status-green';
+            case 'SANITIZATION_FAILED': return 'text-status-red';
+            case 'EXTRACTION_ATTEMPTED': return 'text-status-amber';
+            case 'VERIFICATION_RETURNED': 
+                if (payload?.verdict === 'CONFIRMED') return 'text-status-green';
+                if (payload?.verdict === 'NEEDS_REVIEW') return 'text-status-amber';
+                return 'text-status-red';
+            case 'LEDGER_UPDATED': return 'text-status-purple';
+            case 'ACTION_TAKEN': return 'text-status-blue';
+            case 'WATCHDOG_ESCALATION': return 'text-status-red';
+            case 'CALENDAR_EVENT_CREATED': return 'text-status-blue';
+            case 'DRAFT_COMPOSED': return 'text-status-blue';
+            case 'ACTION_FAILED': return 'text-status-red';
+            case 'DIGEST_GENERATED': return 'text-status-purple';
+            case 'REVIEW_RESOLVED': return 'text-status-green';
             default: return 'text-vulcan-400';
         }
     };
@@ -42,7 +48,7 @@ export const DispatchLog: React.FC<DispatchLogProps> = ({ events, onOpenTrace })
         <div className="flex flex-col h-full font-mono text-xs overflow-hidden">
             <div className="flex-1 overflow-y-auto p-4 space-y-2">
                 {events.map((evt) => (
-                    <div key={evt.id} className="flex flex-col group hover:bg-vulcan-900/40 py-2 px-3 -mx-3 rounded transition-colors">
+                    <div key={evt.id} className="flex flex-col group hover:bg-vulcan-900/60 py-2 px-3 -mx-3 rounded transition-colors animate-log-pulse">
                         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                             <span className="text-vulcan-600 shrink-0 select-none">
                                 [{formatTime(evt.timestamp)}]
@@ -63,7 +69,7 @@ export const DispatchLog: React.FC<DispatchLogProps> = ({ events, onOpenTrace })
                             <span className="text-vulcan-400 shrink-0">
                                 {evt.agent}
                             </span>
-                            <span className={`font-bold shrink-0 ${getEventColor(evt.type)}`}>
+                            <span className={`font-bold shrink-0 ${getEventColor(evt.type, evt.payload)}`}>
                                 {evt.type}
                             </span>
                             <span className="text-vulcan-100 break-words flex-1 min-w-[150px]">
@@ -72,7 +78,7 @@ export const DispatchLog: React.FC<DispatchLogProps> = ({ events, onOpenTrace })
                         </div>
                         
                         {evt.payload && (
-                            <div className="mt-2 text-[10px] text-vulcan-500 border-l border-vulcan-700 pl-3 py-1.5 bg-vulcan-950/50 rounded-r overflow-x-auto w-full">
+                            <div className="mt-2 text-[10px] text-vulcan-300 border-l border-vulcan-700 pl-3 py-1.5 bg-vulcan-950/50 rounded-r overflow-x-auto w-full">
                                 <pre className="whitespace-pre-wrap break-words font-mono leading-relaxed">{JSON.stringify(evt.payload, null, 2)}</pre>
                             </div>
                         )}
