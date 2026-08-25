@@ -94,8 +94,6 @@ export const simulateDispatchEvents = async (payloadStr: string): Promise<Dispat
         });
 
         // --- STAGE 1.5: TRIAGE FILTER (Gemma Simulation) ---
-        // This acts as a lightweight first-pass filter to drop newsletters/noise
-        // before spending a heavier Gemini 3.5 call on extraction.
         const triageSpanId = `span-${generateId()}`;
         const triageStart = Date.now();
         
@@ -207,7 +205,10 @@ export const simulateDispatchEvents = async (payloadStr: string): Promise<Dispat
             contents: `Analyze this raw email text: ${rawEmailText}
             
             1. EXTRACT: task_type, platform, deadline, pay_amount (number), pay_currency.
-            2. VERIFY: Adversarially check the extraction against the raw email text. Return verdict (CONFIRMED, NEEDS_REVIEW, REJECTED) and reason.
+            2. VERIFY: Adversarially check the extraction against the raw email text. 
+               - CRITICAL RULE: If 'deadline' is null/missing, 'pay_amount' is null/0, or 'platform' is null/missing, you MUST return a verdict of NEEDS_REVIEW and state exactly which field is missing in the reason. Do not confirm incomplete tasks.
+               - If the extractor hallucinated data not in the email, return REJECTED.
+               - Only return CONFIRMED if all required fields (platform, deadline, pay_amount > 0) are present, valid, and accurately reflect the email.
             
             Output JSON.`,
             config: {
@@ -338,7 +339,7 @@ export const simulateDispatchEvents = async (payloadStr: string): Promise<Dispat
             addEvent({
                 type: 'ACTION_FAILED',
                 agent: 'CALENDAR_TOOL',
-                message: `Calendar sync failed after retries: ${e.message}`,
+                message: `Calendar sync failed: ${e.message}`,
                 span_id: calSpanId,
                 parent_span_id: ledgerSpanId,
                 duration_ms: Date.now() - calStart,
@@ -366,7 +367,7 @@ export const simulateDispatchEvents = async (payloadStr: string): Promise<Dispat
             addEvent({
                 type: 'ACTION_FAILED',
                 agent: 'DRAFT_COMPOSER',
-                message: `Draft composition failed after retries: ${e.message}`,
+                message: `Draft composition failed: ${e.message}`,
                 span_id: draftSpanId,
                 parent_span_id: ledgerSpanId,
                 duration_ms: Date.now() - draftStart,
