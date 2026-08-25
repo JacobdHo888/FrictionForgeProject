@@ -8,6 +8,14 @@ export class CalendarTool {
      */
     static async createEvent(task: TaskDocument): Promise<any> {
         return withRetry(async () => {
+            // Defensive Guard: Ensure deadline and pay_amount are valid before acting
+            if (!task.deadline || task.deadline === 'Unknown') {
+                throw new Error("Refused: Task is missing a valid deadline.");
+            }
+            if (task.pay_amount === null || task.pay_amount === undefined || task.pay_amount <= 0) {
+                throw new Error("Refused: Task is missing a valid pay amount.");
+            }
+
             // Simulate a random network failure to trigger the retry-with-backoff logic
             if (Math.random() < 0.25) {
                 throw new Error("Calendar API Rate Limit Exceeded (429)");
