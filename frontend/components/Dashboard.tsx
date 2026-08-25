@@ -64,10 +64,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ events, onResolve }) => {
     };
 
     return (
-        <div className="h-full flex flex-col space-y-6 overflow-y-auto p-6 bg-vulcan-950/50">
+        <div className="h-full flex flex-col space-y-6 overflow-y-auto p-6 bg-vulcan-900">
             {/* Top Row: Chart & High Level Stats */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-64 shrink-0">
-                <div className="lg:col-span-2 bg-vulcan-900/50 border border-vulcan-700 rounded-sm p-4 flex flex-col">
+                <div className="lg:col-span-2 bg-vulcan-800/50 border border-vulcan-700 rounded-sm p-4 flex flex-col">
                     <div className="flex items-center space-x-2 mb-4">
                         <Database className="w-4 h-4 text-status-purple" />
                         <h2 className="text-xs font-bold text-vulcan-100 tracking-widest uppercase">Confirmed Pay by Platform</h2>
@@ -84,8 +84,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ events, onResolve }) => {
                                     <YAxis stroke="#888888" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(value) => `$${value}`} />
                                     <Tooltip
                                         cursor={{ fill: '#1f1f1f' }}
-                                        contentStyle={{ backgroundColor: '#121212', borderColor: '#333333', fontSize: '12px', fontFamily: 'monospace' }}
-                                        itemStyle={{ color: '#e0e0e0' }}
+                                        contentStyle={{ backgroundColor: '#1f2937', borderColor: '#374151', fontSize: '12px', fontFamily: 'monospace' }}
+                                        itemStyle={{ color: '#f9fafb' }}
                                         formatter={(value: number) => [`$${value.toFixed(2)}`, 'Confirmed Pay']}
                                     />
                                     <Bar dataKey="pay" fill="#d946ef" radius={[2, 2, 0, 0]} maxBarSize={60}>
@@ -100,13 +100,13 @@ export const Dashboard: React.FC<DashboardProps> = ({ events, onResolve }) => {
                 </div>
                 
                 {/* Review Queue Summary */}
-                <div className="bg-vulcan-900/50 border border-vulcan-700 rounded-sm p-4 flex flex-col">
+                <div className="bg-vulcan-800/50 border border-vulcan-700 rounded-sm p-4 flex flex-col">
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center space-x-2">
                             <AlertOctagon className="w-4 h-4 text-status-red" />
                             <h2 className="text-xs font-bold text-vulcan-100 tracking-widest uppercase">Review Queue</h2>
                         </div>
-                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-sm ${reviewQueue.length > 0 ? 'bg-status-red text-vulcan-950' : 'bg-vulcan-800 text-vulcan-500'}`}>
+                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-sm ${reviewQueue.length > 0 ? 'bg-status-red text-vulcan-950' : 'bg-vulcan-900 text-vulcan-500'}`}>
                             {reviewQueue.length}
                         </span>
                     </div>
@@ -117,7 +117,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ events, onResolve }) => {
                             </div>
                         ) : (
                             reviewQueue.map(item => (
-                                <div key={item.id} className="bg-vulcan-950/50 border border-vulcan-700 p-2 rounded-sm">
+                                <div key={item.id} className="bg-vulcan-900 border border-vulcan-700 p-2 rounded-sm">
                                     <div className="flex justify-between items-center mb-1">
                                         <span className="text-[9px] font-mono text-vulcan-400">
                                             {new Date(item.timestamp).toLocaleTimeString()}
@@ -132,7 +132,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ events, onResolve }) => {
                                     <div className="flex justify-end">
                                         <button 
                                             onClick={() => onResolve(item.taskId)}
-                                            className="text-[9px] font-bold tracking-widest uppercase text-vulcan-300 hover:text-status-blue transition-colors"
+                                            className="text-[9px] font-bold tracking-widest uppercase text-vulcan-400 hover:text-status-blue transition-colors"
                                         >
                                             [ RESOLVE ]
                                         </button>
@@ -145,7 +145,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ events, onResolve }) => {
             </div>
 
             {/* Bottom Row: Recent Tasks */}
-            <div className="flex-1 bg-vulcan-900/50 border border-vulcan-700 rounded-sm p-4 flex flex-col min-h-[300px]">
+            <div className="flex-1 bg-vulcan-800/50 border border-vulcan-700 rounded-sm p-4 flex flex-col min-h-[300px]">
                 <div className="flex items-center space-x-2 mb-4 shrink-0">
                     <Activity className="w-4 h-4 text-status-blue" />
                     <h2 className="text-xs font-bold text-vulcan-100 tracking-widest uppercase">Recent Tasks</h2>
@@ -168,7 +168,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ events, onResolve }) => {
                             </thead>
                             <tbody className="text-xs font-mono text-vulcan-100">
                                 {recentTasks.map(task => (
-                                    <tr key={task.task_id} className="border-b border-vulcan-800/50 hover:bg-vulcan-800/50 transition-colors">
+                                    <tr key={task.task_id} className="border-b border-vulcan-700/50 hover:bg-vulcan-700/50 transition-colors">
                                         <td className="py-3 flex items-center space-x-2">
                                             {getStatusIcon(task.status)}
                                             <span className={`text-[10px] font-bold ${getStatusColor(task.status)}`}>{task.status}</span>
